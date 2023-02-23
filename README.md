@@ -1,7 +1,7 @@
 # ![voila](docs/source/voila-logo.svg)
 
 [![Documentation](http://readthedocs.org/projects/voila/badge/?version=latest)](https://voila.readthedocs.io/en/latest/?badge=latest)
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/voila-dashboards/voila/stable?urlpath=voila%2Ftree%2Fnotebooks)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/albreyes/voila.git/HEAD?urlpath=voila%2Frender%2Fnotebooks%2Fmi_voila.ipynb)
 [![Join the Gitter Chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/QuantStack/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Rendering of live Jupyter notebooks with interactive widgets.
