@@ -110,6 +110,7 @@ class operaciones :
         #n_steps_in, n_steps_out = 7, 7
         # separar en muestras (preparación)
         X,y = operaciones.split_sequence(self, raw_seq, n_steps_in, n_steps_out)
+        #X,y = split_sequence(self, raw_seq, n_steps_in, n_steps_out)
         # remodelación del formato [muestras, timesteps] a [muestras, timesteps, características]
         n_features = 1
         X = X.reshape((X.shape[0], X.shape[1], n_features))
@@ -188,12 +189,14 @@ class operaciones :
         x_sample = l[i_sample]
 
         pred=operaciones.predice_secuencia(self, x_sample,model,n_steps_in,n_features)
+        #pred=predice_secuencia(self, x_sample,model,n_steps_in,n_features)
 
         print('secuencia de entrada:', x_sample)
         print('secuencia de salida (predicha):', pred)
         print('secuencia de salida (real):', y_test[i_sample])
 
         operaciones.grafica_prediccion(self, x_sample, y_test[i_sample], pred, etiquetaEjeY)
+        #grafica_prediccion(self, x_sample, y_test[i_sample], pred, etiquetaEjeY)
 
 
     def predice_secuencia(self, x_sample,model,n_steps_in, n_features):
@@ -216,7 +219,7 @@ class operaciones :
         bqplt.xlabel('tiempo de registro')
         bqplt.ylabel(etiquetaEjeY)
        # bqplt.plot(trama_predicha, color='green', linestyle='dashed')
-        bqplt.plot(trama_predicha, linestyle='dashed')
+        bqplt.plot(trama_predicha, 'g--')
         bqplt.plot(trama_real)
         bqplt.show()
 
@@ -244,6 +247,7 @@ class operaciones :
             # i = i.reshape((1, n_steps_in, n_features))
             # yhat = model.predict(i, verbose=0)
 
+            #yhat = predice_secuencia(self, i,model,n_steps_in, n_features)
             yhat = operaciones.predice_secuencia(self, i,model,n_steps_in, n_features)
 
             lista_tplusn = np.append(lista_tplusn, yhat[0, :])
@@ -263,10 +267,11 @@ class operaciones :
         """
         for i in range(n_steps_out):
             mape = operaciones.mean_absolute_percentage_error(lista_tplusn[:, i], y_test[:, i])
+            #mape = mean_absolute_percentage_error(lista_tplusn[:, i], y_test[:, i])
             print(f'MAPE tiempo t+{i + 1}: {mape:.3}%')
             t = i + 1
             bqplt.figure(title='Error MAPE al tiempo: t+%i' % t)
-            bqplt.plot(lista_tplusn[:, i])
+            bqplt.plot(lista_tplusn[:, i], 'g')
             bqplt.plot(y_test[:, i])
             bqplt.xlabel('tiempo de registro')
             bqplt.ylabel(etiquetaEjeY)
