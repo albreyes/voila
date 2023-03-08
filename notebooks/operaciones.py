@@ -8,6 +8,7 @@ from keras.utils.vis_utils import plot_model
 import csv
 import numpy as np
 import matplotlib.pyplot as plt
+import bqplot.pyplot as bqplt
 from sklearn.model_selection import train_test_split
 from tensorflow import keras
 
@@ -89,12 +90,11 @@ class operaciones :
             secuencia -- Secuencia de datos (list)
             etiquetaEjeY -- Etiqueta de las ordenadas (str)
   """
-        plt.title('Serie de tiempo ')
-        plt.plot(secuencia)
-        plt.xlabel('tiempo de registro')
-        # plt.ylabel('Demanda (GW-h)')
-        plt.ylabel(etiquetaEjeY)
-        plt.show()
+        bqplt.figure(title='Serie de tiempo ')
+        bqplt.plot(secuencia)
+        bqplt.xlabel('tiempo de registro')
+        bqplt.ylabel(etiquetaEjeY)
+        bqplt.show()
 
     def formatea_serie(self, raw_seq,n_steps_in,n_steps_out):
         """Método que formatea una serie de tiempo
@@ -212,13 +212,13 @@ class operaciones :
     def grafica_prediccion(self, x_sample, y_real,pred,etiquetaEjeY):
         trama_real = np.append(x_sample, y_real)
         trama_predicha = np.append(x_sample, pred)
-
-        plt.title('Pronóstico')
-        plt.xlabel('tiempo de registro')
-        plt.ylabel(etiquetaEjeY)
-        plt.plot(trama_predicha, color='green', linestyle='dashed')
-        plt.plot(trama_real)
-        plt.show()
+        bqplt.figure(title='Pronóstico')
+        bqplt.xlabel('tiempo de registro')
+        bqplt.ylabel(etiquetaEjeY)
+       # bqplt.plot(trama_predicha, color='green', linestyle='dashed')
+        bqplt.plot(trama_predicha, linestyle='dashed')
+        bqplt.plot(trama_real)
+        bqplt.show()
 
     # Definimos una función simple para calcular el MAPE
     def mean_absolute_percentage_error(y_true, y_pred):
@@ -265,11 +265,11 @@ class operaciones :
             mape = operaciones.mean_absolute_percentage_error(lista_tplusn[:, i], y_test[:, i])
             print(f'MAPE tiempo t+{i + 1}: {mape:.3}%')
             t = i + 1
-            plt.title('Error MAPE al tiempo: t+%i' % t)
-            plt.plot(lista_tplusn[:, i])
-            plt.plot(y_test[:, i])
-            plt.xlabel('tiempo de registro')
-            plt.ylabel(etiquetaEjeY)
+            bqplt.figure(title='Error MAPE al tiempo: t+%i' % t)
+            bqplt.plot(lista_tplusn[:, i])
+            bqplt.plot(y_test[:, i])
+            bqplt.xlabel('tiempo de registro')
+            bqplt.ylabel(etiquetaEjeY)
             # plt.annotate(f'MAPE tiempo t+{i + 1}: {mape:.3}%',10,10)
-            plt.annotate(mape, (10, 10))
-            plt.show()
+            #bqplt.annotate(mape, (10, 10))
+            bqplt.show()
